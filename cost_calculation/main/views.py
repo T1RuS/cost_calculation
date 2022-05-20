@@ -13,9 +13,10 @@ def index(request):
     }
 
     if request.method == 'POST' and form.is_valid():
-        cost_work = int(form.cleaned_data['cost_work'])
-        count_task = int(form.cleaned_data['count_task'])
-        count_human = int(form.cleaned_data['count_human'])
-        context['cost'] = cost_work * count_human * count_task
-        return render(request, template, context)
+        cost = 1
+        for num in form.cleaned_data.values():
+            cost *= num
+
+        context['cost'] = cost
+
     return render(request, template, context)
