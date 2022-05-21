@@ -5,7 +5,7 @@ class CalculationForm(forms.Form):
     cost_work = forms.FloatField(label='Стоимость услуги',
                                  widget=forms.NumberInput(
                                      attrs={'placeholder': '100'}),
-                                 required=True, min_value=0.01)
+                                 required=True, min_value=1)
     count_human = forms.IntegerField(label='Количество людей',
                                      widget=forms.NumberInput(
                                          attrs={'placeholder': '2'}),

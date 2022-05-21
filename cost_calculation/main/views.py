@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 
 from .forms import CalculationForm
 
@@ -17,6 +18,8 @@ def index(request):
         for num in form.cleaned_data.values():
             cost *= num
 
+        text = f'Общая стоимость: {cost}'
         context['cost'] = cost
+        # return JsonResponse(data={'text': text})
 
     return render(request, template, context)

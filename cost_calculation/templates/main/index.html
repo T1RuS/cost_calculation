@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
   <div class="container py-3">
@@ -6,40 +7,36 @@
       <div class="col-md-5 p-3">
         <div class="card border-2 border-dark">
           <div class="card-body">
-            <form method="Post">
+            <form method="Post" id="form_ajax">
               {% csrf_token %}
-              <div class="form-group row my-1 p-3">
-                <label for="id_cost_work">
-                  {{ form.cost_work.label }}
-                  <span class="required text-danger" >*</span>
-                </label>
-                {{ form.cost_work}}
-
-                <label for="id_count_human">
-                  {{ form.count_human.label }}
-                  <span class="required text-danger" >*</span>
-                </label>
-                {{ form.count_human}}
-
-                <label for="id_count_task">
-                  {{ form.count_task.label }}
-                  <span class="required text-danger" >*</span>
-                </label>
-                {{ form.count_task}}
-
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">
-                     Посчитать
-                  </button>
-                </div>
+              <div class="form-group row my-2 p-3">
+                {% for field in form %}
+                  <label for="id_cost_work">
+                    {{ field.label }}
+                    <span class="required text-danger" >*</span>
+                  </label>
+                  {{ field }}
+                {% endfor %}
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">
+                  Посчитать
+                </button>
               </div>
             </form>
           </div>
           <div class="card-footer text-center">
-            <p>Общая стоимость: {% if cost != None %} {{ cost }} {% endif %}</p>
+            <p id="text_cost">Общая стоимость: {% if cost != None %} {{ cost }} {% endif %}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block add_script %}
+   <!--
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src={% static "js/main_ajax.js" %}></script>
+  -->
 {% endblock %}
