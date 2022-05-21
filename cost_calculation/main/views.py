@@ -20,6 +20,6 @@ def index(request):
 
         text = f'Общая стоимость: {cost}'
         context['cost'] = cost
-        # return JsonResponse(data={'text': text})
+        return JsonResponse(data={'text': text})
 
     return render(request, template, context)
